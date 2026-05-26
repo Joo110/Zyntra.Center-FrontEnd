@@ -2,9 +2,9 @@ import { useState, useEffect, useCallback } from 'react';
 import toast from 'react-hot-toast';
 import {
   Plus, Pencil, Trash2, GraduationCap, Eye, Wallet,
-  Users, BookOpen, CheckCircle2, Clock, Banknote,
+  Users, BookOpen, CheckCircle2, Banknote,
   CreditCard, Smartphone, ArrowDownCircle, X,
-  ChevronRight, AlertCircle,
+
 } from 'lucide-react';
 import { teachersApi } from '../../api/services';
 import type {

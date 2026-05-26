@@ -172,19 +172,63 @@ export const attendanceApi = {
   update: (id: string, dto: UpdateAttendanceDto) => getData<AttendanceDto>(apiClient.put(`/Attendance/${id}`, dto)),
 };
 
-// ── Exams ─────────────────────────────────────────────────────────────────────
 export const examsApi = {
-  getPaged: (pageNumber: number, pageSize: number, groupId?: string, activeOnly = true) =>
-    getData<PagedResult<ExamDto>>(apiClient.get('/Exams', { params: { pageNumber, pageSize, groupId, activeOnly } })),
-  getById: (id: string) => getData<ExamDto>(apiClient.get(`/Exams/${id}`)),
-  getByGroup: (groupId: string) => getData<ExamDto[]>(apiClient.get(`/Exams/by-group/${groupId}`)),
-  create: (dto: CreateExamDto) => getData<ExamDto>(apiClient.post('/Exams', dto)),
-  update: (id: string, dto: UpdateExamDto) => getData<ExamDto>(apiClient.put(`/Exams/${id}`, dto)),
-  delete: (id: string) => getData<boolean>(apiClient.delete(`/Exams/${id}`)),
-  recordResult: (dto: ExamResultDto) => getData<ExamResultDto>(apiClient.post('/Exams/result', dto)),
-  recordBulkResults: (dto: BulkExamResultDto) => getData<boolean>(apiClient.post('/Exams/results/bulk', dto)),
-};
+  getPaged: (
+    pageNumber: number,
+    pageSize: number,
+    groupId?: string,
+    activeOnly = true
+  ) =>
+    getData<PagedResult<ExamDto>>(
+      apiClient.get('/Exams', {
+        params: {
+          pageNumber,
+          pageSize,
+          groupId,
+          activeOnly,
+        },
+      })
+    ),
 
+  getById: (id: string) =>
+    getData<ExamDto>(apiClient.get(`/Exams/${id}`)),
+
+  getByGroup: (groupId: string) =>
+    getData<ExamDto[]>(
+      apiClient.get(`/Exams/by-group/${groupId}`)
+    ),
+
+  // ✅ أضف هذا
+  getResults: (examId: string) =>
+    getData<ExamResultDto[]>(
+      apiClient.get(`/Exams/${examId}/results`)
+    ),
+
+  create: (dto: CreateExamDto) =>
+    getData<ExamDto>(
+      apiClient.post('/Exams', dto)
+    ),
+
+  update: (id: string, dto: UpdateExamDto) =>
+    getData<ExamDto>(
+      apiClient.put(`/Exams/${id}`, dto)
+    ),
+
+  delete: (id: string) =>
+    getData<boolean>(
+      apiClient.delete(`/Exams/${id}`)
+    ),
+
+  recordResult: (dto: ExamResultDto) =>
+    getData<ExamResultDto>(
+      apiClient.post('/Exams/result', dto)
+    ),
+
+  recordBulkResults: (dto: BulkExamResultDto) =>
+    getData<boolean>(
+      apiClient.post('/Exams/results/bulk', dto)
+    ),
+};
 // ── Payments ──────────────────────────────────────────────────────────────────
 export const paymentsApi = {
   getPaged: (pageNumber: number, pageSize: number, studentId?: string, groupId?: string, from?: string, to?: string) =>
